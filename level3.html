@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wędrychowicz</title>
+    <meta name="description" content="Wędrychowicz-simple VR game">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+	
+	
+	<script>
+	var p=0;
+	var ding = new Audio("ding.mp3");
+	var winningsound = new Audio("win.mp3");
+	
+    function clickFun() {		
+			var t = document.getElementById('clicks');	
+			p++;
+			if(p<30){
+				t.setAttribute('value',p);	
+				ding.play();
+			}else{
+				t.setAttribute('value',p);	
+				ding.play();
+				winningsound.play();
+				setTimeout(() => {window.open("end.html?pas="+p+"", "_top"); },1000);
+			}			
+			console.log("clicked");
+        }
+		
+		function getP(){
+        tmp = [];
+		location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === "pas") p = decodeURIComponent(tmp[1]);
+        });
+		var t = document.getElementById('clicks');
+			t.setAttribute('value',p);
+			
+			
+			var c = document.getElementById('count');
+		setTimeout(() => {c.setAttribute('value',9); },1000);
+		setTimeout(() => {c.setAttribute('value',8); },2000);
+		setTimeout(() => {c.setAttribute('value',7); },3000);
+		setTimeout(() => {c.setAttribute('value',6); },4000);
+		setTimeout(() => {c.setAttribute('value',5); },5000);
+		setTimeout(() => {c.setAttribute('value',4); },6000);
+		setTimeout(() => {c.setAttribute('value',3); },7000);
+		setTimeout(() => {c.setAttribute('value',2); },8000);
+		setTimeout(() => {c.setAttribute('value',1); },9000);
+		setTimeout(() => {c.setAttribute('value',0); },10000);
+		setTimeout(() => {window.open("end.html?pas="+p+"", "_top");},11000);
+		}
+		window.onload = getP;
+		
+
+    </script>
+	
+	
+	
+  </head>
+  <body>
+    <a-scene game>
+      <a-assets>
+		<a-sphere color="#03A9F4" width="1" height="1" depth="1"></a-sphere>
+        <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+        <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
+      </a-assets>
+      	  
+      <a-sphere position="10.96 2 22.47" onClick="clickFun()"  rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>	 	
+	  <a-sphere position="4.34 2 -24.62" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>
+	    <a-sphere position="22.07 2 11.74" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>	  
+	  <a-sphere position="24.75 2 -3.47" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>	
+	  <a-sphere position="17.98 2 -17.36" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>
+	  <a-sphere position="-10.95 2 -22.46" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>
+	  <a-sphere position="-22.07 2 -11.73" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>
+	  <a-sphere position="-24.75 2 3.47" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>
+	  <a-sphere position="-17.98 2 17.3665" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>
+	  <a-sphere position="-4.34 2 24.6" onClick="clickFun()" rotation="0 45 45" scale="1 1 1" color="#FF0000" onClick="click()">
+        <a-animation attribute="scale" begin="click" dur="1000" to="0 0 0"></a-animation>
+      </a-sphere>
+	
+	  
+	  
+      <a-sky height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
+      <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
+	  
+      <a-camera>
+        <a-cursor color="#FAFAFA"></a-cursor>
+		<a-text id='clicks' value="0" color="#BBB" position="0 3 -4" scale="1.5 1.5 1.5"></a-text>		
+		<a-text id='count' value="15" color="#FF0000" position="0 2.5 -4" scale="1 1 1"></a-text>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>

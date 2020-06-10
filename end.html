@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wędrychowicz</title>
+    <meta name="description" content="Wędrychowicz-simple VR game">
+	<style>
+		body {
+		  position: relative; /* usually the parent, in this case the body element, has position relative so that the absolute positioned child is positioned relative to it */
+		  height: 100vh; /* 100% of the viewport height */
+		  margin: 0; /* recommended */
+		}
+		h1 {
+		 position: absolute; /* taken out of the normal flow of the document */
+		 top: 50%; /* moved down by 50% of the screen height */
+		 transform: translateY(-50%); /* moved back up (Y axis) by half of its height to achieve the perfect center */
+		 width: 100%; /* needs to be defined to keep the default block behavior */
+		 text-align: center;
+		 margin: 0; /* again, for perfect center */
+		 color:white
+		}
+		h2 {
+		 position: absolute; /* taken out of the normal flow of the document */
+		 top: 60%; /* moved down by 50% of the screen height */
+		 transform: translateY(-70%); /* moved back up (Y axis) by half of its height to achieve the perfect center */
+		 width: 100%; /* needs to be defined to keep the default block behavior */
+		 text-align: center;
+		 margin: 0; /* again, for perfect center */
+		 color:white
+		}
+		
+		h3 {
+		 position: absolute; /* taken out of the normal flow of the document */
+		 top: 80%; /* moved down by 50% of the screen height */
+		 transform: translateY(-70%); /* moved back up (Y axis) by half of its height to achieve the perfect center */
+		 width: 100%; /* needs to be defined to keep the default block behavior */
+		 text-align: center;
+		 margin: 0; /* again, for perfect center */
+		 color:white
+		}
+	</style>
+	
+	<script>
+	var p=0;
+	var ding = new Audio("ding.mp3");
+	var winningsound = new Audio("win.mp3");
+	
+    function clickFun() {		
+			var t = document.getElementById('clicks');	
+			p++;
+			if(p<10){
+				t.setAttribute('value',p);	
+				ding.play();
+			}else{
+				t.setAttribute('value','wygrana!');
+				ding.play();
+				winningsound.play();
+				setTimeout(() => {window.open("end.html?pas="+p+"", "_top"); },1000);
+			}			
+			console.log("clicked");
+        }
+		
+		function getP(){
+        tmp = [];
+		location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === "pas") p = decodeURIComponent(tmp[1]);
+        });
+		var x = "liczba zdobytych punktów: "+p;
+		var t = document.getElementById('points').innerHTML = x;
+
+		}
+		window.onload = getP;
+		
+
+    </script>
+	
+  </head>
+  <body>
+	<img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
+      <h1> koniec gry! </h1>	
+	  <h2 id='points'> liczba zdobytych punktów: 20 </h2>
+	  <h3 onclick="location.href='Level1.html'"> zagraj ponownie </h3>
+  </body>
+</html>
